@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.erudio.javaspringerudio.data.vo.v1.PersonVO;
 import com.erudio.javaspringerudio.model.Person;
 import com.erudio.javaspringerudio.services.PersonService;
 
@@ -25,18 +26,18 @@ public class PersonController {
   private PersonService service;
 
   @GetMapping
-  public ResponseEntity<List<Person>> findAll() {
-    List<Person> list = service.findAll();
+  public ResponseEntity<List<PersonVO>> findAll() {
+    List<PersonVO> list = service.findAll();
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping(value = "/{id}")
-  public ResponseEntity<Person> findById(@PathVariable Long id) {
+  public ResponseEntity<PersonVO> findById(@PathVariable Long id) {
     return ResponseEntity.ok().body(service.findById(id));
   }
 
   @PostMapping
-  public ResponseEntity<Person> create(@RequestBody Person obj) {
+  public ResponseEntity<PersonVO> create(@RequestBody PersonVO obj) {
     obj = service.create(obj);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
     return ResponseEntity.created(uri).body(obj);
@@ -49,7 +50,7 @@ public class PersonController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<Person> update(@PathVariable Long id, @RequestBody Person obj) {
+  public ResponseEntity<PersonVO> update(@PathVariable Long id, @RequestBody PersonVO obj) {
     obj = service.update(id, obj);
     return ResponseEntity.ok().body(obj);
   }

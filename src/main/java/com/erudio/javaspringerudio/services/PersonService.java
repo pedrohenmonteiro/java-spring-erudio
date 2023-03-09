@@ -1,5 +1,6 @@
 package com.erudio.javaspringerudio.services;
 
+import com.erudio.javaspringerudio.data.vo.v1.PersonVO;
 import com.erudio.javaspringerudio.exceptions.ResourceNotFoundException;
 import com.erudio.javaspringerudio.model.Person;
 import java.util.List;
@@ -16,15 +17,15 @@ public class PersonService {
   private PersonRepository repository;
   private static final String ERROR_MSG = "This resource was not found";
 
-  public List<Person> findAll() {
+  public List<PersonVO> findAll() {
     return repository.findAll();
   }
 
-  public Person findById(Long id) {
+  public PersonVO findById(Long id) {
     return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ERROR_MSG));
   }
 
-  public Person create(Person obj) {
+  public PersonVO create(PersonVO obj) {
     return repository.save(obj);
   }
 
@@ -33,7 +34,7 @@ public class PersonService {
     repository.delete(entity);
   }
 
-  public Person update(Long id, Person obj) {
+  public PersonVO update(Long id, PersonVO obj) {
     var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ERROR_MSG));
     updateData(entity, obj);
     return repository.save(entity);
