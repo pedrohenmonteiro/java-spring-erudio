@@ -23,4 +23,8 @@ public class PersonService {
   public Person findById(Long id) {
     return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
   }
+
+  public Person create(Person obj) {
+    return repository.save(obj);
+  }
 }
