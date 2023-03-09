@@ -1,5 +1,6 @@
 package com.erudio.javaspringerudio.services;
 
+import com.erudio.javaspringerudio.exceptions.ResourceNotFoundException;
 import com.erudio.javaspringerudio.model.Person;
 import java.util.List;
 
@@ -20,6 +21,6 @@ public class PersonService {
   }
 
   public Person findById(Long id) {
-    return repository.findById(id).orElseThrow(() -> new RuntimeException());
+    return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
   }
 }
