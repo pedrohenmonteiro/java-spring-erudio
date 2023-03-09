@@ -27,4 +27,9 @@ public class PersonService {
   public Person create(Person obj) {
     return repository.save(obj);
   }
+
+  public void delete(Long id) {
+    var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+    repository.delete(entity);
+  }
 }
