@@ -1,12 +1,13 @@
-package com.erudio.mapper;
+package com.erudio.javaspringerudio.mapper;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
 
 public class DozerMapper {
+
   private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
   public static <O, D> D parseObject(O origin, Class<D> destination) {

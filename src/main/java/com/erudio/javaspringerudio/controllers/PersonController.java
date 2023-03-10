@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.erudio.javaspringerudio.data.vo.v1.PersonVO;
-import com.erudio.javaspringerudio.model.Person;
+import com.erudio.javaspringerudio.data.vo.v2.PersonVOV2;
 import com.erudio.javaspringerudio.services.PersonService;
 
 @RestController
@@ -39,6 +39,13 @@ public class PersonController {
   @PostMapping
   public ResponseEntity<PersonVO> create(@RequestBody PersonVO obj) {
     obj = service.create(obj);
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+    return ResponseEntity.created(uri).body(obj);
+  }
+
+  @PostMapping(value = "/v2")
+  public ResponseEntity<PersonVOV2> createV2(@RequestBody PersonVOV2 obj) {
+    obj = service.createV2(obj);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
     return ResponseEntity.created(uri).body(obj);
   }
